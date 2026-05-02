@@ -31,7 +31,7 @@ This project was developed as a capstone system for Dr. Gloria D. Lacson Foundat
 
 ## My Contribution
 
-* Designed and developed the full-stack system using Laravel, JavaScript, and MySQL
+* Designed and developed the full-stack system using PHP, JavaScript, and MySQL
 * Implemented role-based access control for multiple user types
 * Integrated secure authentication and CAPTCHA validation
 * Optimized database queries and indexing to enhance performance
