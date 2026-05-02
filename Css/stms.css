@@ -1,0 +1,2011 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--success-bg: #d4edda;
+	--success-color: #0f5705;
+	--error-bg: #f8d7da;
+	--error-color: #721c24;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+	--blue: #0f5705;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--dark-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFb700;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+	--footer-height: 64px;
+
+	/* Component-specific variables (used by pages moved from inline styles) */
+	--btn-primary: #3C91E6;
+	--btn-primary-hover: #0f5705;
+	--btn-danger: #dc3545;
+	--btn-danger-hover: #b02a37;
+
+	--status-success-bg: #d4edda;
+	--status-success-color: #0f5705;
+	--status-error-bg: #f8d7da;
+	--status-error-color: #721c24;
+
+	--table-bg: #ffffff;
+	--table-row-hover: #f9f9f9;
+}
+
+html {
+	overflow-x: hidden;
+}
+
+body.dark {
+	--light: #0C0C1E;
+	--grey: #060714;
+	--dark: #FBFBFB;
+	--success-bg: rgba(40,167,69,0.12);
+	--success-color: #b8f0c6;
+	--error-bg: rgba(249, 207, 211, 0.12);
+	--error-color: #f5a3ab;
+
+	/* component-specific dark overrides */
+	--btn-primary: #2A6BD6;
+	--btn-primary-hover: #0f5705;
+	--btn-danger: #b02a37;
+	--btn-danger-hover: #8a2229;
+
+	--status-success-bg: #0f5705;
+	--status-success-color: #9fe0a8;
+	--status-error-bg: #2b0b0c;
+	--status-error-color: #f2a3a8;
+
+	--table-bg: var(--grey);
+	--table-row-hover: rgba(255,255,255,0.02);
+}
+
+
+/* Styles moved from Admin/create_room_section.php */
+.form-class{
+	margin-top:15px;
+}
+
+/* Responsive grid for form fields so each field aligns with filters */
+.form-class > div{
+	display: grid;
+ 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+ 	gap: 12px;
+}
+
+/* Unified input/select/textarea style used by filters and form fields */
+.search-input,
+.form-class input,
+.form-class select,
+.form-class textarea{
+ 	padding:10px 12px;
+ 	border-radius:8px;
+ 	border:1px solid var(--grey);
+ 	outline:none;
+ 	background: transparent;
+ 	color: var(--dark);
+ 	font-size:14px;
+ 	width:100%;
+ 	box-sizing: border-box;
+}
+
+/* Small variation for compact rows (checkbox groups) */
+.days-wrap.compact{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.days-wrap.compact .day-item{ display:flex; align-items:center; gap:6px; font-size:13px; }
+.days-wrap.compact .day-item input{ width:auto; height:auto; }
+
+.status{
+	padding:10px;
+	margin-top:10px;
+	border-radius:6px;
+}
+.status.success{
+	background: var(--success-bg);
+	color: var(--success-color);
+}
+.status.error{
+	background: var(--error-bg);
+	color: var(--error-color);
+}
+
+/* Buttons (consistent, theme-aware text color) */
+.btn{
+	padding:8px 15px;
+	border-radius:6px;
+	border:none;
+	cursor:pointer;
+	text-decoration:none;
+	display:inline-block;
+	color: #fff;
+}
+.btn.primary{
+	background:var(--blue);
+	color: #fff;
+}
+.btn.primary:hover{
+    filter:brightness(.95);
+}
+.btn.danger{
+	background:var(--red);
+	color: #fff;
+}
+
+/* Small list used by some pages - hidden by default and toggled by JS */
+#studentList .student-item{
+    display:none; /* JS toggles to inline style 'flex' when showing */
+    align-items:center;
+    background:var(--light);
+    border-radius:6px;
+    padding:6px 10px;
+    white-space:nowrap;
+    cursor:pointer;
+    box-sizing: border-box;
+    height: auto; /* allow items to grow vertically in single column */
+    overflow: visible;
+    flex: 0 0 100%; /* single column layout */
+    width: 100%;
+}
+
+td .btn{ margin-right:10px; }
+
+/* Table styles for create_room_section */
+#studentList .student-item input[type="checkbox"]{
+	margin-right:8px;
+	vertical-align:middle;
+	margin-top:0;
+	box-sizing: border-box;
+	width:16px;
+	height:16px;
+	flex: 0 0 20px;
+}
+
+#studentList .student-item label{
+	display:block;
+	line-height:1.2;
+	white-space:normal; /* allow wrapping in single column */
+	overflow: visible;
+	text-overflow:clip;
+	min-width:0;
+	flex: 1 1 auto;
+}
+	margin-top:15px;
+	background:var(--light);
+}
+table thead tr{ border-bottom:2px solid var(--grey); }
+table th{ padding:12px; text-align:left; font-weight:600; vertical-align:middle; box-sizing: border-box; }
+table td{ padding:12px; text-align:left; vertical-align:middle; box-sizing: border-box; }
+table tbody tr{ border-bottom:1px solid var(--grey); }
+table tbody tr:last-child{ border-bottom:none; }
+table tbody tr:hover{ background:var(--grey); }
+table th:last-child, table td:last-child{ width:180px; }
+
+
+
+
+body {
+	background: var(--grey);
+	overflow-x: hidden;
+}
+
+
+
+
+
+/* SIDEBAR */
+#sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 280px;
+	height: 100%;
+	background: var(--light);
+	z-index: 2000;
+	font-family: var(--lato);
+	transition: .3s ease;
+	overflow-x: hidden;
+	scrollbar-width: none;
+}
+#sidebar::--webkit-scrollbar {
+	display: none;
+}
+#sidebar.hide {
+	width: 60px;
+}
+#sidebar .brand {
+	font-size: 24px;
+	font-weight: 700;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--blue);
+	position: sticky;
+	top: 0;
+	left: 0;
+	background: var(--light);
+	z-index: 500;
+	padding: 8px 0;
+	box-sizing: border-box;
+	overflow: visible;
+}
+#sidebar .brand .bx {
+	min-width: 60px;
+	display: flex;
+	justify-content: center;
+}
+
+/* Barangay logo: centered by default and draggable */
+#sidebar .brand {
+	position: sticky;
+}
+
+#sidebar .brand img {
+	width: 120px;
+	max-width: 100%;
+	height: auto;
+	object-fit: contain;
+	position: absolute;
+	left: 50%;
+	top: 80%;
+	transform: translate(-50%, -50%);
+	cursor: grab;
+	touch-action: none;
+	user-select: none;
+}
+
+#sidebar .brand img.dragging {
+	cursor: grabbing;
+}
+
+@media (max-width: 420px) {
+	#sidebar .brand img {
+		width: 60px;
+	}
+}
+#sidebar .side-menu {
+	width: 100%;
+	margin-top: 48px;
+}
+#sidebar .side-menu li {
+	height: 48px;
+	background: transparent;
+	margin-left: 6px;
+	border-radius: 48px 0 0 48px;
+	padding: 4px;
+}
+#sidebar .side-menu li.active {
+	background: var(--grey);
+	position: relative;
+}
+#sidebar .side-menu li.active::before {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	top: -40px;
+	right: 0;
+	box-shadow: 20px 20px 0 var(--grey);
+	z-index: -1;
+}
+#sidebar .side-menu li.active::after {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	bottom: -40px;
+	right: 0;
+	box-shadow: 20px -20px 0 var(--grey);
+	z-index: -1;
+}
+#sidebar .side-menu li a {
+	width: 100%;
+	height: 100%;
+	background: var(--light);
+	display: flex;
+	align-items: center;
+	border-radius: 48px;
+	font-size: 16px;
+	color: var(--dark);
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+#sidebar .side-menu.top li.active a {
+	color: var(--blue);
+}
+#sidebar.hide .side-menu li a {
+	width: calc(48px - (4px * 2));
+	transition: width .3s ease;
+}
+#sidebar .side-menu li a.logout {
+	color: var(--red);
+}
+#sidebar .side-menu.top li a:hover {
+	color: var(--blue);
+}
+#sidebar .side-menu li a .bx {
+	min-width: calc(60px  - ((4px + 6px) * 2));
+	display: flex;
+	justify-content: center;
+}
+/* SIDEBAR */
+
+/* Create sub-section toggles */
+#sidebar .create-section {
+	width: 100%;
+	margin-top: 8px;
+	padding-left: 6px;
+}
+#sidebar .create-section li {
+	height: 44px;
+	margin-left: 6px;
+	border-radius: 8px;
+}
+#sidebar .create-section.show { display: block; }
+#sidebar .create-section { display: none; }
+
+/* Make create-section match top menu hover/active styles */
+#sidebar .create-section li a {
+	width: 100%;
+	height: 100%;
+	background: var(--light);
+	display: flex;
+	align-items: center;
+	border-radius: 48px;
+	font-size: 16px;
+	color: var(--dark);
+	white-space: nowrap;
+	overflow-x: hidden;
+	padding: 4px;
+	transition: .18s ease, color .18s ease;
+}
+#sidebar .create-section li a .bx { min-width: 60px; display:flex; justify-content:center; }
+#sidebar .create-section li a:hover { color: var(--blue); }
+
+/* Ensure active state uses same blue color and background bubble */
+#sidebar .side-menu li.active a {
+	color: var(--blue);
+}
+
+/* Dark mode: ensure Create subsection mirrors Manage Room styling */
+body.dark #sidebar .create-section li a {
+	background: var(--light);
+	color: var(--dark);
+}
+
+/* Active/hover in dark mode uses same highlights as other side-menu items */
+body.dark #sidebar .side-menu.top li.active a,
+body.dark #sidebar .side-menu li.active a {
+	color: var(--blue);
+}
+
+/* Smooth fade/slide for create section when toggled */
+#sidebar .create-section {
+	display: none; /* default hidden; JS toggles display and class.show */
+	opacity: 0;
+	transform: translateY(-4px);
+	transition: opacity .18s ease, transform .18s ease;
+}
+#sidebar .create-section.show {
+	display: block;
+	opacity: 1;
+	transform: translateY(0);
+}
+
+
+
+
+
+/* CONTENT */
+#content {
+	position: relative;
+	width: calc(100% - 280px);
+	left: 280px;
+	transition: .3s ease;
+	padding-bottom: var(--footer-height);
+}
+#sidebar.hide ~ #content {
+	width: calc(100% - 60px);
+	left: 60px;
+}
+
+
+
+
+/* NAVBAR */
+#content nav {
+	height: 56px;
+	background: var(--light);
+	padding: 0 24px;
+	display: flex;
+	align-items: center;
+	grid-gap: 24px;
+	font-family: var(--lato);
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+}
+#content nav::before {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	bottom: -40px;
+	left: 0;
+	border-radius: 50%;
+	box-shadow: -20px -20px 0 var(--light);
+}
+#content nav a {
+	color: var(--dark);
+}
+#content nav .bx.bx-menu {
+	cursor: pointer;
+	color: var(--dark);
+}
+#content nav .nav-link {
+	font-size: 16px;
+	transition: .3s ease;
+}
+#content nav .nav-link:hover {
+	color: var(--blue);
+}
+#content nav form {
+	max-width: 400px;
+	width: 100%;
+	margin-right: auto;
+}
+#content nav form .form-input {
+	display: flex;
+	align-items: center;
+	height: 36px;
+}
+#content nav form .form-input input {
+	flex-grow: 1;
+	padding: 0 16px;
+	height: 100%;
+	border: none;
+	background: var(--grey);
+	border-radius: 36px 0 0 36px;
+	outline: none;
+	width: 100%;
+	color: var(--dark);
+}
+#content nav form .form-input button {
+	width: 36px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--blue);
+	color: var(--light);
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-radius: 0 36px 36px 0;
+	cursor: pointer;
+}
+
+/* When the search form is moved into the dashboard head-title */
+/* When the search form is moved into the dashboard head-title */
+.head-title {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+.head-title form {
+	max-width: 400px;
+	width: 100%;
+	margin-left: auto;
+}
+.head-title .form-input,
+.head-title .form-input input,
+.head-title .form-input button {
+	/* reuse nav styles but scoped to the head-title */
+}
+.head-title .form-input {
+	display: flex;
+	align-items: center;
+	height: 36px;
+}
+.head-title .form-input input {
+	flex-grow: 1;
+	padding: 0 16px;
+	height: 100%;
+	border: none;
+	background: var(--grey);
+	border-radius: 36px 0 0 36px;
+	outline: none;
+	width: 100%;
+	color: var(--dark);
+}
+.head-title .form-input button {
+	width: 36px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--blue);
+	color: var(--light);
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-radius: 0 36px 36px 0;
+	cursor: pointer;
+}
+
+/* Make the searchbar curve visible by outlining the whole control */
+.head-title .form-input {
+	border: 1px solid var(--dark);
+	border-radius: 36px;
+	overflow: hidden;
+	background: transparent;
+}
+.head-title .form-input input {
+	background: transparent;
+	padding-left: 16px;
+	padding-right: 8px;
+}
+.head-title .form-input button {
+	border-left: none;
+}
+
+/* keep layout on very narrow screens */
+@media (max-width: 576px) {
+	.head-title #dashboard-search-target { display: none; }
+}
+
+/* Placeholder to preserve layout when header search is removed */
+.form-placeholder {
+	max-width: 400px;
+	width: 100%;
+	margin-right: auto;
+	height: 36px;
+}
+/* hide placeholder on narrow screens like the original form */
+@media (max-width: 576px) {
+	.form-placeholder { display: none; }
+}
+
+/* --- Styles moved from create_room_section.php --- */
+.form-class{
+	display:flex;
+	gap:10px;
+	margin-top:15px;
+}
+.form-class input{
+	padding:10px;
+	border-radius:8px;
+	border:1px solid var(--dark-grey);
+	outline:none;
+	width:250px;
+	background: transparent;
+	color: var(--dark);
+}
+
+/* compact days checkboxes placed neatly under schedule time */
+.days-wrap{ margin-top:6px; }
+.days-wrap.compact{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.days-wrap.compact .day-item{ display:flex; align-items:center; gap:6px; background:transparent; padding:4px 6px; border-radius:6px; }
+.days-wrap.compact .day-item input{ width:14px; height:14px; }
+.days-wrap.compact .day-item span{ font-size:13px; color:var(--dark); }
+
+/* Make Room Section, Semester, and Year visually match Subject Name */
+.form-class select[name="classId"],
+.form-class select[name="type"],
+.form-class select[name="year"],
+.form-class input[name="classArmName"] {
+	min-height: 56px;
+	height: 56px;
+	font-size: 15px;
+	padding: 12px 14px;
+	border-radius: 10px;
+	border: 1px solid rgba(26,122,58,0.14);
+	background: linear-gradient(180deg, #ffffff, #f8fff8);
+	box-shadow: 0 8px 22px rgba(26,122,58,0.05);
+}
+
+/* Slightly stronger emphasis for subject name to match requested size/design */
+.form-class input[name="classArmName"] {
+	box-shadow: 0 14px 34px rgba(26,122,58,0.06);
+}
+
+/* Ensure selects show same vertical alignment as inputs */
+.form-class select[name="classId"],
+.form-class select[name="type"],
+.form-class select[name="year"] {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+@media (max-width: 880px) {
+	.form-class select[name="classId"],
+	.form-class select[name="type"],
+	.form-class select[name="year"],
+	.form-class input[name="classArmName"] {
+		height: 48px;
+		min-height: 48px;
+	}
+}
+
+/* Status messages */
+.status{
+	padding:10px;
+	margin-top:10px;
+	border-radius:6px;
+}
+.status.success{
+	background:var(--status-success-bg);
+	color:var(--status-success-color);
+}
+.status.error{
+	background:var(--status-error-bg);
+	color:var(--status-error-color);
+}
+
+/* Buttons */
+.btn{
+	padding:8px 15px;
+	border-radius:6px;
+	border:none;
+	cursor:pointer;
+	text-decoration:none;
+	display:inline-block;
+}
+.btn.primary{
+	background:var(--btn-primary);
+	color:var(--dark);
+}
+.btn.primary:hover{
+	background:var(--btn-primary-hover);
+}
+.btn.danger{
+	background:var(--btn-danger);
+	color:var(--dark);
+}
+.btn.danger:hover{
+	background:var(--btn-danger-hover);
+}
+.btn.small{
+	font-size:13px;
+	padding:5px 10px;
+}
+/* specific small view button used in several admin pages */
+.view-btn{
+	background:#28a745;
+	color:var(--dark);
+	padding:6px 10px;
+	border-radius:6px;
+	border:none;
+	cursor:pointer;
+}
+/* spacing for action buttons inside table cells */
+td .btn{
+	margin-right:10px;
+}
+
+/* Table styles */
+table{
+	width:100%;
+	border-collapse:collapse;
+	margin-top:15px;
+	background:var(--table-bg);
+	color:var(--dark);
+}
+table thead tr{
+	border-bottom:2px solid var(--grey);
+}
+table th{
+	padding:12px;
+	text-align:left;
+	font-weight:600;
+	vertical-align:middle;
+	box-sizing: border-box;
+}
+table td{
+	padding:12px;
+	text-align:left;
+	vertical-align:middle;
+	box-sizing: border-box;
+}
+table tbody tr{
+	border-bottom:1px solid rgba(0,0,0,0.05);
+}
+table tbody tr:last-child{
+	border-bottom:none;
+}
+table tbody tr:hover{
+	background:var(--table-row-hover);
+}
+table th:last-child,
+table td:last-child{
+	width:180px;
+}
+
+.no-records-center{ text-align:center; }
+
+/* simple helpers for small inline layouts previously present */
+.flex-between{ display:flex; justify-content:space-between; align-items:center; }
+.row-controls{ display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+.search-input{ padding:5px 10px; border-radius:5px; border:1px solid var(--dark-grey); }
+
+/* Make form controls in .form-class match the filter/search design and sizing */
+.form-class{ display:flex; gap:10px; margin-top:15px; align-items:center; flex-wrap:wrap; }
+.form-class .search-input{
+	padding:10px;
+	border-radius:8px;
+	border:1px solid var(--dark-grey);
+	background:transparent;
+	color:var(--dark);
+	width:300px;
+}
+.form-class input.search-input{ box-sizing:border-box; }
+
+/* placeholders inherit current text color for better dark-mode contrast */
+.form-class .search-input::placeholder{ color:inherit; opacity:0.7; }
+
+/* Ensure table text is visible in both light and dark modes */
+table, table th, table td { color: var(--dark); }
+
+/* Dark-mode fixes for form controls and dropdowns */
+body.dark .search-input,
+body.dark input,
+body.dark textarea,
+body.dark select {
+	color: var(--dark);
+	background: transparent;
+	border-color: rgba(255,255,255,0.08);
+}
+
+body.dark select option {
+	background: var(--light);
+	color: var(--dark);
+}
+
+/* Allow using the same form-style on filter controls outside the form */
+.search-input.form-style{
+	padding:10px;
+	border-radius:8px;
+	border:1px solid var(--dark-grey);
+	background:transparent;
+	color:var(--dark);
+	width:300px;
+	box-sizing:border-box;
+}
+
+/* Keep name fields black even in dark mode */
+.name-field{ color:#000; }
+body.dark .name-field{ color: var(--dark) !important; }
+
+
+
+/* small margin helper used by pagination containers moved from inline styles */
+.mt-15 { margin-top: 15px; }
+
+/* --- end moved styles --- */
+/* Styles moved from Admin/assign_parents.php */
+#studentList{
+	display:flex;
+	flex-wrap:wrap;
+	gap:10px;
+	padding:5px 0;
+	max-height:300px;
+	overflow-y:auto;
+	margin-top:5px;
+}
+#studentList .student-item{
+	display:none; /* hidden by default; JS will set style.display = 'flex' for matches */
+	align-items:center; /* vertically center checkbox relative to wrapped label when shown */
+	gap:12px;
+	background:#f0f0f0;
+	border-radius:6px;
+	padding:8px 12px;
+	white-space:normal; /* allow wrapping of label */
+	cursor:pointer;
+	box-sizing: border-box;
+	width:100%;
+}
+
+#studentList .student-item input[type="checkbox"]{
+	margin:0;
+	width:18px;
+	height:18px;
+	flex: 0 0 22px;
+}
+
+#studentList .student-item label{
+	margin:0;
+	line-height:1.3;
+	white-space:normal;
+	overflow:visible;
+	text-overflow:clip;
+	flex:1 1 auto; /* label takes remaining space and wraps */
+}
+
+/* Dark mode overrides for student list and filter controls */
+body.dark #studentList .student-item{
+	background: rgba(255,255,255,0.04);
+	color: var(--dark);
+	border: 1px solid rgba(255,255,255,0.04);
+}
+
+body.dark .search-input,
+body.dark input.search-input,
+body.dark select.search-input{
+	background: var(--light);
+	color: var(--dark);
+	border-color: rgba(255,255,255,0.08);
+}
+
+body.dark select option{
+	background: var(--light);
+	color: var(--dark);
+}
+#content nav .notification {
+	font-size: 20px;
+	position: relative;
+}
+#content nav .notification .num {
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 2px solid var(--light);
+	background: var(--red);
+	color: var(--light);
+	font-weight: 700;
+	font-size: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#content nav .profile img {
+	width: 36px;
+	height: 36px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+/* Profile modal styles */
+.modal {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0,0,0,0.45);
+	/* Add padding so modal never touches viewport edges and stays visually centered */
+	padding: 32px 16px;
+	z-index: 4000;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity .2s ease, visibility .2s ease;
+}
+.modal[aria-hidden="false"] {
+	visibility: visible;
+	opacity: 1;
+}
+.modal-content {
+	/* make modals wider by default so content can flow horizontally
+	   and reduce vertical growth; keep max-width responsive */
+	width: 900px;
+	max-width: calc(100% - 48px);
+	background: var(--light);
+	color: var(--dark);
+	border-radius: 8px;
+	padding: 16px;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+	/* allow taller modals but prevent them from filling the whole viewport */
+	max-height: 80vh;
+	overflow-y: auto;
+	box-sizing: border-box;
+}
+.modal-close {
+	background: transparent;
+	border: none;
+	font-size: 22px;
+	float: right;
+	cursor: pointer;
+}
+.profile-pic {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin-bottom: 12px;
+}
+.profile-pic img {
+	width: 80px;
+	height: 80px;
+	border-radius: 8px;
+	object-fit: cover;
+	border: 1px solid var(--grey);
+}
+.file-label {
+	display: inline-block;
+	background: var(--blue);
+	color: var(--light);
+	padding: 8px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+.file-label input[type="file"] {
+	display: none;
+}
+.modal .field { display:block; margin-bottom:10px; font-size:14px; }
+.modal .field input { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:6px; }
+.modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:12px }
+.btn-save { background:var(--blue); color:var(--light); border:none; padding:8px 14px; border-radius:6px; cursor:pointer }
+.btn-cancel { background:transparent; border:1px solid var(--grey); padding:8px 12px; border-radius:6px; cursor:pointer }
+
+/* Modal table used by student details modal in all_courses.php */
+#modalTable { width: 100%; border-collapse: collapse; margin-top: 15px; table-layout: fixed; }
+/* force three columns so sentences wrap horizontally instead of stacking vertically */
+#modalTable th,
+#modalTable td {
+	border: 1px solid rgba(0,0,0,0.08);
+	padding: 8px;
+	text-align: left;
+	vertical-align: top;
+	white-space: normal;
+	word-break: break-word;
+	width: 33.333%;
+}
+#modalTable th { background: #f4f4f4; }
+
+/* Dark mode adjustments so modal table remains visible */
+body.dark #modalTable th { background: rgba(255,255,255,0.03); }
+body.dark #modalTable th, body.dark #modalTable td { border-color: rgba(255,255,255,0.06); color: var(--dark); }
+#content nav .datetime {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+	margin: 0 14px;
+	font-size: 15px;
+	color: var(--dark);
+	white-space: nowrap;
+}
+#content nav .datetime span { line-height: 1; }
+#content nav .datetime #current-date {
+	font-weight: 600;
+	font-size: 15px;
+}
+#content nav .datetime #current-time {
+	font-size: 14px;
+	color: var(--dark-grey);
+	font-weight: 600;
+}
+
+/* Hide only on very narrow screens */
+@media (max-width: 360px) {
+	#content nav .datetime { display: none; }
+}
+#content nav .switch-mode {
+	display: block;
+	min-width: 50px;
+	height: 25px;
+	border-radius: 25px;
+	background: var(--grey);
+	cursor: pointer;
+	position: relative;
+}
+#content nav .switch-mode::before {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	bottom: 2px;
+	width: calc(25px - 4px);
+	background: var(--blue);
+	border-radius: 50%;
+	transition: all .3s ease;
+}
+#content nav #switch-mode:checked + .switch-mode::before {
+	left: calc(100% - (25px - 4px) - 2px);
+}
+/* NAVBAR */
+
+
+
+
+
+/* MAIN */
+#content main {
+	width: 100%;
+	padding: 36px 24px;
+	font-family: var(--poppins);
+	max-height: calc(100vh - 56px);
+	overflow-y: auto;
+}
+#content main .head-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	grid-gap: 16px;
+	flex-wrap: wrap;
+}
+
+/* Mobile tweaks: make modal slightly narrower and reduce padding on small screens */
+@media (max-width: 480px) {
+    .modal-content {
+		width: 92%;
+		padding: 10px;
+		max-height: calc(50vh - 64px);
+    }
+}
+#content main .head-title .left h1 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: var(--dark);
+}
+#content main .head-title .left .breadcrumb {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+}
+#content main .head-title .left .breadcrumb li {
+	color: var(--dark);
+}
+#content main .head-title .left .breadcrumb li a {
+	color: var(--dark-grey);
+	pointer-events: none;
+}
+#content main .head-title .left .breadcrumb li a.active {
+	color: var(--blue);
+	pointer-events: unset;
+}
+#content main .head-title .btn-download {
+	height: 36px;
+	padding: 0 16px;
+	border-radius: 36px;
+	background: var(--blue);
+	color: var(--light);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-gap: 10px;
+	font-weight: 500;
+}
+
+
+
+
+#content main .box-info {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-gap: 24px;
+	margin-top: 36px;
+}
+#content main .box-info li {
+	padding: 24px;
+	background: var(--light);
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	grid-gap: 24px;
+}
+#content main .box-info li .bx {
+	width: 80px;
+	height: 80px;
+	border-radius: 10px;
+	font-size: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#content main .box-info li:nth-child(1) .bx {
+	background: var(--light-blue);
+	color: var(--blue);
+}
+#content main .box-info li:nth-child(2) .bx {
+	background: var(--light-yellow);
+	color: var(--yellow);
+}
+#content main .box-info li:nth-child(3) .bx {
+	background: var(--light-orange);
+	color: var(--orange);
+}
+#content main .box-info li:nth-child(4) .bx {
+	background: #E9F7EF; /* light green */
+	color: #127106; /* dark green */
+}
+#content main .box-info li:nth-child(5) .bx {
+	background: #E8F0FF; /* light blue/purple */
+	color: #2A6BD6; /* primary blue */
+}
+#content main .box-info li .text h3 {
+	font-size: 24px;
+	font-weight: 600;
+	color: var(--dark);
+	}
+
+/* Footer */
+.brgy-footer {
+	background: var(--light);
+	border-top: 1px solid rgba(0,0,0,0.04);
+	color: var(--dark-grey);
+	font-family: var(--poppins);
+	font-size: 14px;
+	padding: 18px 16px;
+	height: var(--footer-height);
+	box-sizing: border-box;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 1600;
+}
+.brgy-footer .footer-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+.brgy-footer .footer-left p {
+	margin: 0;
+	color: var(--dark-grey);
+}
+.brgy-footer .footer-center a {
+	margin: 0 8px;
+	color: var(--dark-grey);
+	text-decoration: none;
+	opacity: 0.9;
+}
+.brgy-footer .footer-center a:hover {
+	color: var(--blue);
+}
+.brgy-footer .footer-right a {
+	margin-left: 10px;
+	color: var(--dark-grey);
+	font-size: 18px;
+}
+.brgy-footer .footer-right a:hover {
+	color: var(--blue);
+}
+
+@media (max-width: 720px) {
+	.brgy-footer .footer-inner {
+		flex-direction: column;
+		text-align: center;
+	}
+	.brgy-footer .footer-center { margin: 8px 0; }
+}
+
+#content main .box-info li .text p {
+	color: var(--dark);	
+}
+
+
+
+
+
+#content main .table-data {
+	display: flex;
+	flex-wrap: wrap;
+	grid-gap: 24px;
+	margin-top: 24px;
+	width: 100%;
+	color: var(--dark);
+}
+#content main .table-data > div {
+	border-radius: 20px;
+	background: var(--light);
+	padding: 24px;
+	overflow-x: auto;
+}
+#content main .table-data .head {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+	margin-bottom: 24px;
+}
+#content main .table-data .head h3 {
+	margin-right: auto;
+	font-size: 24px;
+	font-weight: 600;
+}
+#content main .table-data .head .bx {
+	cursor: pointer;
+}
+
+#content main .table-data .order {
+	flex-grow: 1;
+	flex-basis: 500px;
+}
+
+/* Mobile: make table-data blocks stack and use full width */
+@media (max-width: 700px) {
+	#content {
+		width: 100%;
+		left: 0;
+	}
+	#content nav { padding: 0 12px; }
+	#content main .table-data {
+		margin-top: 12px;
+		gap: 12px;
+	}
+	#content main .table-data > div {
+		padding: 12px;
+		overflow-x: visible; /* avoid inner horizontal scroll */
+		width: 100%;
+		box-sizing: border-box;
+	}
+	#content main .table-data .order,
+	#content main .table-data .verify {
+		flex-basis: 100%;
+		flex-grow: 0;
+	}
+}
+#content main .table-data .order table {
+	width: 100%;
+	border-collapse: collapse;
+}
+#content main .table-data .order table th {
+	padding-bottom: 12px;
+	font-size: 13px;
+	text-align: left;
+	border-bottom: 1px solid var(--grey);
+}
+#content main .table-data .order table td {
+	padding: 12px;
+}
+#content main .table-data .order table tr td:first-child {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-left: 12px;
+}
+#content main .table-data .order table td img {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+#content main .table-data .order table tbody tr:hover {
+	background: var(--grey);
+}
+#content main .table-data .order table tr td .status {
+	font-size: 10px;
+	padding: 6px 16px;
+	color: var(--light);
+	border-radius: 20px;
+	font-weight: 700;
+}
+#content main .table-data .order table tr td .status.completed {
+	background: var(--blue);
+}
+#content main .table-data .order table tr td .status.process {
+	background: var(--yellow);
+}
+#content main .table-data .order table tr td .status.pending {
+	background: var(--orange);
+}
+
+
+#content main .table-data .todo {
+	flex-grow: 1;
+	flex-basis: 300px;
+}
+
+#content main .table-data .verify {
+	flex-grow: 0;
+	flex-basis: 220px;
+}
+#content main .table-data .verify .verify-list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+#content main .table-data .verify .verify-list li {
+	background: var(--grey);
+	padding: 12px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+}
+#content main .table-data .verify .verify-list li strong {
+	font-size: 20px;
+	color: var(--dark);
+}
+#content main .table-data .verify .verify-list li span {
+	font-size: 13px;
+	color: var(--dark-grey);
+}
+
+#content main .table-data .order canvas { 
+	width: 100% !important;
+	display: block;
+	margin-bottom: 18px;
+	height: 260px; /* default desktop chart height */
+	max-height: 360px;
+}
+
+/* Ensure inline SVG icons used in the verify list are visible */
+#content main .table-data .verify .verify-list li .stat-left{
+	display:flex;
+	align-items:center;
+	gap:10px;
+}
+#content main .table-data .verify .verify-list li .stat-icon{
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	width:28px;
+	height:28px;
+	flex:0 0 28px;
+	color:var(--blue); /* default icon color */
+}
+#content main .table-data .verify .verify-list li .stat-icon svg{
+	width:100%;
+	height:100%;
+	display:block;
+	fill:currentColor; /* use the parent's color */
+}
+
+/* Per-stat custom colors */
+.courses-color + span, .courses-color{ color: var(--blue); }
+.parents-color + span, .parents-color{ color: #FD7238; }
+
+/* Make Chart.js canvas responsive by controlling height at breakpoints */
+@media (max-width: 1024px) {
+	#content main .table-data .order canvas { height: 220px; }
+}
+@media (max-width: 720px) {
+	#content main .table-data .order canvas { height: 180px; }
+}
+@media (max-width: 420px) {
+	#content main .table-data .order canvas { height: 140px; }
+}
+#content main .table-data .todo .todo-list {
+	width: 100%;
+}
+#content main .table-data .todo .todo-list li {
+	width: 100%;
+	margin-bottom: 16px;
+	background: var(--grey);
+	border-radius: 10px;
+	padding: 14px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#content main .table-data .todo .todo-list li .bx {
+	cursor: pointer;
+}
+#content main .table-data .todo .todo-list li.completed {
+	border-left: 10px solid var(--blue);
+}
+#content main .table-data .todo .todo-list li.not-completed {
+	border-left: 10px solid var(--orange);
+}
+#content main .table-data .todo .todo-list li:last-child {
+	margin-bottom: 0;
+}
+/* MAIN */
+/* CONTENT */
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+	#sidebar {
+		width: 200px;
+	}
+
+	#content {
+		width: calc(100% - 60px);
+		left: 200px;
+	}
+
+	#content nav .nav-link {
+		display: none;
+	}
+}
+
+
+
+
+
+
+@media screen and (max-width: 576px) {
+	#content nav form .form-input input {
+		display: none;
+	}
+
+	#content nav form .form-input button {
+		width: auto;
+		height: auto;
+		background: transparent;
+		border-radius: none;
+		color: var(--dark);
+	}
+
+	#content nav form.show .form-input input {
+		display: block;
+		width: 100%;
+	}
+	#content nav form.show .form-input button {
+		width: 36px;
+		height: 100%;
+		border-radius: 0 36px 36px 0;
+		color: var(--light);
+		background: var(--red);
+	}
+
+	#content nav form.show ~ .notification,
+	#content nav form.show ~ .profile {
+		display: none;
+	}
+
+	#content main .box-info {
+		grid-template-columns: 1fr;
+	}
+
+	#content main .table-data .head {
+		min-width: 420px;
+	}
+	#content main .table-data .order table {
+		min-width: 420px;
+	}
+	#content main .table-data .todo .todo-list {
+		min-width: 420px;
+	}
+}
+
+/* Create Room Section form styles (scoped) */
+#content main .table-data .create-section {
+	max-width: 420px;
+	width: 100%;
+	margin-right: 16px;
+}
+#content main .table-data .create-section .head h3 {
+	font-size: 20px;
+	margin-bottom: 12px;
+}
+#content main .table-data .form-create-room {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+#content main .table-data .form-create-room .form-row {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+#content main .table-data .form-create-room .form-row label {
+	font-size: 13px;
+	color: var(--dark-grey);
+}
+#content main .table-data .form-create-room input[type="text"],
+#content main .table-data .form-create-room input[type="number"],
+#content main .table-data .form-create-room select {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid rgba(0,0,0,0.06);
+	border-radius: 8px;
+	background: var(--light);
+	color: var(--dark);
+	outline: none;
+	font-size: 14px;
+}
+#content main .table-data .form-create-room input:focus,
+#content main .table-data .form-create-room select:focus {
+	box-shadow: 0 4px 12px rgba(18,113,6,0.06);
+	border-color: rgba(18,113,6,0.18);
+}
+#content main .table-data .form-create-room .btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+}
+#content main .table-data .form-create-room .btn.primary {
+	background: var(--blue);
+	color: var(--light);
+}
+#content main .table-data .form-create-room .btn.small {
+	padding: 6px 8px;
+	font-size: 13px;
+}
+#content main .table-data .form-create-room .btn.danger,
+#content main .table-data .form-create-room .btn.small.danger {
+	background: var(--red);
+	color: var(--light);
+}
+#content main .table-data .form-create-room .btn.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+/* Meta and pagination styling for the list */
+#content main .table-data .order .meta {
+	font-size: 13px;
+	color: var(--dark-grey);
+	margin-bottom: 10px;
+}
+#content main .table-data .order .pagination {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin-top: 12px;
+}
+#content main .table-data .order .pagination .btn {
+	padding: 8px 12px;
+	border-radius: 8px;
+	background: var(--light);
+	border: 1px solid rgba(0,0,0,0.04);
+	color: var(--dark);
+}
+#content main .table-data .order .pagination .btn.disabled {
+	opacity: 0.5;
+}
+#content main .table-data .order .pagination .page-info {
+	font-size: 14px;
+	color: var(--dark-grey);
+}
+
+
+/* Custom styles for create room section box and table-classlist to match admin design */
+#content main .box-info .create-section {
+	padding: 24px;
+	background: #ffffff;
+	border-radius: 20px;
+	display: block;
+	max-width: 420px;
+}
+#content main .box-info .create-section h3 {
+	margin: 0 0 12px 0;
+	font-size: 20px;
+}
+#content main .box-info .create-section form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+#content main .box-info .create-section input[type="text"] {
+	padding: 10px 12px;
+	border: 1px solid rgba(0,0,0,0.06);
+	border-radius: 8px;
+	background: var(--light);
+	color: var(--dark);
+	outline: none;
+	font-size: 14px;
+}
+#content main .box-info .create-section button {
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: none;
+	background: var(--blue);
+	color: var(--light);
+	cursor: pointer;
+	font-weight: 600;
+}
+#content main .box-info .create-section .status {
+	margin-bottom: 8px;
+}
+#content main .box-info .create-section .status.success { color: var(--blue); }
+#content main .box-info .create-section .status.error { color: var(--red); }
+
+/* Table style matching .table-data .order table */
+.table-classlist {
+	width: 100%;
+	border-collapse: collapse;
+}
+.table-classlist thead th {
+	padding-bottom: 12px;
+	font-size: 13px;
+	text-align: left;
+	border-bottom: 1px solid var(--grey);
+}
+.table-classlist td {
+	padding: 16px 0;
+}
+.table-classlist tbody tr:hover {
+	background: var(--grey);
+}
+.table-classlist a { color: var(--blue); text-decoration: none; }
+.table-classlist a:hover { text-decoration: underline; }
+
+/* Make create-section full width on small screens */
+@media (max-width: 720px) {
+	#content main .box-info .create-section { max-width: 100%; }
+}
+
+/* Create-section card: white background and form/button styles */
+.box-info {
+	margin: 18px 0;
+	display: flex;
+	gap: 24px;
+}
+.box-info .create-section {
+	background: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 8px 24px rgba(34,34,34,0.04);
+	max-width: 480px;
+	width: 100%;
+	font-family: var(--poppins);
+	color: var(--dark);
+}
+.box-info .create-section h3 { margin-bottom: 12px; font-size: 18px; }
+.box-info .create-section .status { margin-bottom: 12px; }
+.box-info .create-section .status.error { color: var(--red); }
+.box-info .create-section .status.success { color: var(--blue); }
+.box-info .create-section form input[type="text"] {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid #e7e7e7;
+	border-radius: 8px;
+	margin-bottom: 12px;
+	font-size: 14px;
+	outline: none;
+	color: var(--dark);
+	background: #fff;
+}
+.box-info .create-section form input[type="text"]:focus {
+	box-shadow: 0 6px 18px rgba(18,113,6,0.06);
+	border-color: var(--blue);
+}
+.box-info .create-section .btn.primary {
+	padding: 10px 16px;
+	border-radius: 8px;
+	font-weight: 700;
+	box-shadow: 0 8px 20px rgba(18,113,6,0.08);
+}
+
+/* Action buttons (edit/delete) styling inside the table */
+.table-classlist .btn {
+	border-radius: 8px;
+	padding: 6px 10px;
+	transition: transform .06s ease, opacity .12s ease;
+}
+.table-classlist .btn:hover { transform: translateY(-1px); }
+.table-classlist .btn.danger {
+	background: var(--red);
+	color: #fff;
+	border-color: rgba(219,80,74,0.12);
+	box-shadow: 0 6px 18px rgba(219,80,74,0.06);
+}
+.table-classlist .btn:hover { opacity: 0.98; }
+
+/* Generic button styles used across admin */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: 1px solid rgba(0,0,0,0.06);
+	background: transparent;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 14px;
+}
+.btn.primary {
+	background: var(--blue);
+    color: #fff;
+	border-color: rgba(18,113,6,0.12);
+	box-shadow: 0 6px 18px rgba(18,113,6,0.06);
+}
+.btn.small {
+	padding: 6px 8px;
+	font-size: 13px;
+}
+.btn.danger {
+	background: var(--red);
+	color: #fff;
+	border-color: rgba(219,80,74,0.12);
+}
+
+/* Make action links inside tables look like subtle pills */
+.table-classlist .btn {
+	display: inline-block;
+	padding: 6px 10px;
+	border-radius: 6px;
+	font-weight: 600;
+	font-size: 13px;
+}
+.table-classlist .btn.small { padding: 5px 8px; }
+.table-classlist .btn:hover { opacity: 0.95; }
+
+/* Ensure status messages inside create box are readable */
+.box-info .create-section .status { margin-bottom: 10px; font-weight: 600; }
+
+/* ===== Alignment fixes: normalize table cell padding & vertical alignment ===== */
+/* Make all tables have consistent vertical alignment so rows line up */
+table th, table td {
+	vertical-align: middle;
+	padding: 12px; /* unify cell padding across tables */
+}
+
+/* Ensure images inside tables align center with text */
+table img { vertical-align: middle; }
+
+/* Specific table variants that had different padding earlier */
+.table-classlist td {
+	padding: 12px; /* override earlier 16px 0 */
+	vertical-align: middle;
+}
+
+/* Modal table used in student details */
+#modalTable th,
+#modalTable td {
+	padding: 12px;
+	vertical-align: middle;
+}
+
+/* Keep first-column flex alignment consistent (some tables use flex there) */
+#content main .table-data .order table tr td:first-child {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-left: 12px;
+}
+
+
+/* ================= Student Search Results ================= */
+/* ================= Student / Parent Search Results ================= */
+#studentSearchResults,
+#parentSearchResults {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	overflow-y: auto;
+	border: 1px solid var(--table-row-hover);
+	padding: 6px;
+	margin-top: 6px;
+	background: var(--light);
+	color: var(--dark);
+}
+
+#studentSearchResults { max-height: 200px; }
+#parentSearchResults { max-height: 150px; margin-bottom:6px; }
+
+#studentSearchResults .student-item,
+#parentSearchResults .parent-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 4px;
+	border-bottom: 1px solid var(--table-row-hover);
+}
+
+#studentSearchResults .student-item label,
+#parentSearchResults .parent-item label { margin: 0; }
+
+#studentSearchResults .student-item input[type="checkbox"],
+#parentSearchResults .parent-item input[type="radio"] { flex: 0 0 auto; }
+
+/* Enforce white text for buttons in both light and dark themes */
+.btn, .btn.primary, .btn.danger, .view-btn {
+	color: #fff !important;
+}
+
+/* small tweak: ensure view-btn uses the green background even in components with other button backgrounds */
+.view-btn { background:#0f5705 !important; }
+
+/* Modal container */
+#examModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#examModal[aria-hidden="false"] {
+    display: flex;
+}
+
+/* Modal content */
+#examModal .modal-content {
+   
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;   /* important for absolute close btn */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* FIX CLOSE BUTTON */
+#examModal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: auto;        /* remove full width */
+    background: none;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Optional hover effect */
+#examModal .close:hover {
+    color: red;
+}
+
+#examModal label {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+#examModal input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#examModal .btn {
+    margin-top: 10px;
+}
+
+/* Modal container */
+#gradeModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#gradeModal[aria-hidden="false"] {
+    display: flex;
+}
+
+/* Modal content */
+#gradeModal .modal-content {
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;   /* important for absolute close btn */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* FIX CLOSE BUTTON */
+#gradeModal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: auto;        
+    background: none;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Optional hover effect */
+#gradeModal .close:hover {
+    color: red;
+}
+
+#gradeModal label {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+#gradeModal input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#gradeModal .btn {
+    margin-top: 10px;
+}
+/* Modal container */
+#quizModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#quizModal[aria-hidden="false"] {
+    display: flex;
+}
+
+/* Modal content */
+#quizModal .modal-content {
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;   /* important for absolute close btn */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+/* CLOSE BUTTON */
+#quizModal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: auto;        
+    background: none;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Hover effect */
+#quizModal .close:hover {
+    color: red;
+}
+
+#quizModal label {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+#quizModal input[type="text"],
+#quizModal input[type="number"],
+#quizModal input[type="date"],
+#quizModal select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#quizModal .btn {
+    margin-top: 10px;
+}
